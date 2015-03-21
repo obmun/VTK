@@ -490,13 +490,13 @@ VTKTCL_EXPORT void vtkTclVoidFunc(void *arg)
       vtkGenericWarningMacro("Error returned from vtk/tcl callback:\n" <<
                              arg2->command << endl <<
                              Tcl_GetVar(arg2->interp,(char *)("errorInfo"),0) <<
-                             " at line number " << arg2->interp->errorLine);
+                             " at line number " << Tcl_GetErrorLine(arg2->interp));
       }
     else
       {
       vtkGenericWarningMacro("Error returned from vtk/tcl callback:\n" <<
                              arg2->command << endl <<
-                             " at line number " << arg2->interp->errorLine);
+                             " at line number " << Tcl_GetErrorLine(arg2->interp));
       }
     }
 }
@@ -723,14 +723,14 @@ void vtkTclCommand::Execute(vtkObject *, unsigned long, void *)
       vtkGenericWarningMacro("Error returned from vtk/tcl callback:\n" <<
                              this->StringCommand << endl <<
                              Tcl_GetVar(this->Interp,(char *)("errorInfo"),0) <<
-                             " at line number " << this->Interp->errorLine);
+                             " at line number " << Tcl_GetErrorLine(this->Interp));
       }
     else
       {
       vtkGenericWarningMacro("Error returned from vtk/tcl callback:\n" <<
                              this->StringCommand << endl <<
                              " at line number " << 
-                             this->Interp->errorLine);
+                             Tcl_GetErrorLine(this->Interp));
       }
     }
   else if (res == -1)
